@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventbrite</title>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <section class="logo-and-search">
+          <span class="logo">Eventbrite</span>
+          <input class="search-box" type="search" />
+        </section>
+        <div class="navigation-styles">
+          <i class="hamburger-menu" data-feather="menu" onClick="openNav()"></i>
+          <ul class="links" id="links_toggle">
+            <li><a href="">Event</a></li>
+            <li><a href="">Organize</a></li>
+            <li><a href="">Help</a></li>
+            <li><a href="">Login</a></li>
+            <li><a href="">Signup</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div class="hero-section">
+        <div class="hero-section-background">
+          <div class="banner-container">
+            <img src="./assets/banner.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="content-column column-one">
+        <h2>Date</h2>
+        <h1>Title of the event</h1>
+        <h3>Tag line of the event goes here</h3>
+
+        <div class="follow-section">
+          <div class="followers-count">
+            <h4>By some company LTD</h4>
+            <h4>54 Followers</h4>
+          </div>
+          <button>Follow</button>
+        </div>
+      </div>
+      <div class="content-column column-two">
+        <div class="border-styling">
+          <h2>Registration</h2>
+          <!-- <div class="btn-group">
+            <button id="minus">-</button>
+            <span id="number"></span>
+            <button id="add">+</button>
+          </div>
+          <h3>Pricing</h3>
+          <h4>0.00</h4> -->
+          <h4>Starts at 300TK</h4>
+          <br />
+          <button onclick="window.location.href = './seatArrangement.html'">
+            Buy ticket
+          </button>
+        </div>
+      </div>
+      <!-- <div class="content-column column-two">
+          <div class="border-styling">
+            <h2>Registration</h2>
+            <div class="btn-group">
+              <button id="minus">-</button>
+              <span id="number"></span>
+              <button id="add">+</button>
+            </div>
+            <h3>Pricing</h3>
+            <h4>0.00</h4>
+            <br />
+            <button onclick="window.location.href = './seatArrangement.html'">
+              Buy ticket
+            </button>
+          </div>
+        </div> -->
+
+      <div class="location-detail-container">
+        <h2>When and Where</h2>
+        <div class="location-detail">
+          <div class="date">
+            <h2>Location and time</h2>
+            <p>
+              Sat, March 18, 2023, <br />
+              10:00 AM – 8:00 PM Bangladesh <br />
+              Standard Time Bangladesh Time
+            </p>
+          </div>
+          <div class="location">
+            <h2>Location</h2>
+            <p>
+              Bangabandhu International <br />
+              Conference Center Begum Rokeya <br />
+              Avenue Dhaka, Dhaka Division 1207
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-event">
+        <h2>About the event</h2>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit
+          repellat neque sed non, odio error perferendis dolor possimus numquam
+          eum esse quidem tempore quaerat nihil voluptas repellendus unde, ipsa
+          explicabo nobis vel aut magnam ipsum sit! Perspiciatis vero aspernatur
+          molestiae accusamus necessitatibus asperiores, magnam ipsam ratione
+          magni voluptas. Ea, error nisi explicabo sit unde commodi nihil enim.
+          Quia architecto eos vero reiciendis cupiditate, voluptas labore veniam
+          possimus cum, perferendis praesentium voluptatum nihil odio, iste
+          accusantium debitis aut nam saepe aspernatur dolor. Odit cumque atque
+          cupiditate officia, rerum error? Cum nulla consectetur blanditiis illo
+          id? Adipisci consequuntur eveniet nihil ratione, incidunt explicabo
+          voluptas! Nobis rerum cum ducimus! Dolorem sint vitae asperiores et
+          accusantium fugit atque beatae rerum quisquam ratione vero, reiciendis
+          doloribus quidem. Dolorem fuga nam molestias ab aut qui obcaecati
+          iure, similique eaque aliquam magni eum labore minima impedit
+          architecto ratione hic perferendis quas temporibus id, adipisci iste,
+          et ut! Corrupti et dicta quo, magni rerum ipsum explicabo at hic
+          repellendus, quam est velit delectus perspiciatis veritatis illo
+          ducimus nam aperiam, numquam cumque a nemo sunt dolorum ipsam. Quod
+          architecto dolorum corrupti nisi dignissimos nemo aperiam
+          exercitationem aspernatur ratione delectus voluptate nulla inventore
+          non animi, eligendi, tempora beatae eaque. Possimus?
+        </p>
+      </div>
+
+      <div class="social-links-container">
+        <h2>Share with friends</h2>
+        <div class="social-link">
+          <i data-feather="facebook"></i>
+          <i data-feather="twitter"></i>
+          <i data-feather="message-square"></i>
+          <i data-feather="linkedin"></i>
+        </div>
+      </div>
+
+      <div class="about-org-container">
+        <h2>About the organizer</h2>
+        <div class="about-org">
+          <h4>Organized by</h4>
+          <h3>Company Ltd.</h3>
+          <p>
+            65 <br />
+            follower
+          </p>
+          <div class="about-btn-group">
+            <button>Contact</button>
+            <button>Follow</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>
