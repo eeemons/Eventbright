@@ -352,6 +352,14 @@ input[type="checkbox"]:checked:before {
   max-width: 800px;
 }
 
+.seat-arrangement__user-info {
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 1;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .table-left {
   position: absolute;
   left: 0;
@@ -415,6 +423,12 @@ input[type="checkbox"]:checked:before {
   padding: 10px 30px;
   background: #252d3d;
   color: white;
+}
+
+.seat-arrange__btn-disable {
+  cursor: not-allowed;
+  background: #ccc;
+  color: #000;
 }
 
 .seat-arrange__input {

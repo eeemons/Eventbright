@@ -58,9 +58,11 @@ function updateTextArea() {
     var allNameVals = [];
     var allNumberVals = [];
     var allSeatsVals = [];
+    var allEmailVals = [];
 
     //Storing in Array
     allNameVals.push($("#Username").val());
+    allEmailVals.push($("#Email").val());
     allNumberVals.push($("#Numseats").val());
     $("#seatsBlock :checked").each(function () {
       allSeatsVals.push($(this).val());
@@ -68,8 +70,13 @@ function updateTextArea() {
 
     //Displaying
     $("#nameDisplay").val(allNameVals);
+    $("#emailDisplay").val(allEmailVals);
     $("#NumberDisplay").val(allNumberVals);
     $("#seatsDisplay").val(allSeatsVals);
+
+    var button = document.querySelector("#seat-arrange__btn-disable");
+    button.disabled = false;
+    button.classList.remove("seat-arrange__btn-disable");
   } else {
     alert("Please select " + $("#Numseats").val() + " seats");
   }
@@ -105,3 +112,23 @@ $(":checkbox").click(function () {
   }
 });
 //seat arrangement ends
+
+//payment
+function proceedToPayment() {
+  var allNameVals = [];
+  var allNumberVals = [];
+  var allSeatsVals = [];
+  var allEmailVals = [];
+
+  allNameVals.push($("#Username").val());
+  allEmailVals.push($("#Email").val());
+  allNumberVals.push($("#Numseats").val());
+  $("#seatsBlock :checked").each(function () {
+    allSeatsVals.push($(this).val());
+  });
+
+  // console.log(allNameVals);
+  // console.log(allNumberVals);
+  // console.log(allSeatsVals);
+  // console.log(allEmailVals);
+}

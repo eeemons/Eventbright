@@ -31,8 +31,19 @@
 <main>
 <div class="inputForm">
 <center>
-  <b>Name *:</b> <input type="text" id="Username" class="seat-arrange__input" placeholder="Enter your name" required>
-  <b>Number of Seats *:</b> <input type="number" class="seat-arrange__input" placeholder="Enter number of seats" id="Numseats" required>
+  <div class="seat-arrangement__user-info">
+  <div class="user-info-column">
+    <b>Name *:</b> <input type="text" id="Username" class="seat-arrange__input" placeholder="Enter your name" required>
+  </div>
+
+  <div class="user-info-column">
+    <b>Number of Seats *:</b> <input type="number" class="seat-arrange__input" placeholder="Enter number of seats" id="Numseats" required>
+  </div>  
+
+  <div class="user-info-column">
+    <b>Email *:</b> <input type="email" name="" id="Email" class="seat-arrange__input" required>
+  </div>
+  </div>
   <br/><br/>
   <button class="seat-arrange__btn" onclick="takeData()">Start Selecting</button>
 </center>
@@ -771,15 +782,22 @@
     <th>Name</th>
     <th>Number of Seats</th>
     <th>Seats</th>
+    <th>Email</th>
   </tr>
   <tr>
     <td><textarea id="nameDisplay"></textarea></td>
     <td><textarea id="NumberDisplay"></textarea></td>
     <td><textarea id="seatsDisplay"></textarea></td>
+    <td><textarea id="emailDisplay"></textarea></td>
   </tr>
 </table>
 </center>
 </div>
+<br>
+<center>
+  <button disabled id="seat-arrange__btn-disable" class="seat-arrange__btn seat-arrange__btn-disable" onclick="proceedToPayment()">Proceed to payment</button>
+</center>
+<br>
 </main>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
