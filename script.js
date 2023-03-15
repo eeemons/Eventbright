@@ -99,7 +99,11 @@ async function updateTextArea() {
     }
   ).then((response) => response.json());
 
-  if ($("input:checked").length == $("#Numseats").val()) {
+  const databaseSeatCount = seat.seats.length;
+  const actualSeatCount = Math.abs(
+    $("input:checked").length - databaseSeatCount
+  );
+  if (actualSeatCount == $("#Numseats").val()) {
     $(".seatStructure *").prop("disabled", true);
 
     var allNameVals = [];
@@ -117,11 +121,22 @@ async function updateTextArea() {
       allSeatsVals.push($(this).val());
     });
 
+    let myArr = [];
+    seat.seats.forEach((element) => {
+      myArr.push(element.seatNumber);
+    });
+
+    // console.log(allSeatsVals);
+    // console.log(myArr);
+
+    let difference = allSeatsVals.filter((x) => myArr.indexOf(x) === -1);
+    // console.log(difference);
+
     //Displaying
     $("#nameDisplay").val(allNameVals);
     $("#emailDisplay").val(allEmailVals);
     $("#NumberDisplay").val(allNumberVals);
-    $("#seatsDisplay").val(allSeatsVals);
+    $("#seatsDisplay").val(difference);
     $("#eventDisplay").val(allEventVals);
 
     var button = document.querySelector("#seat-arrange__btn-disable");
@@ -164,7 +179,15 @@ $(":checkbox").click(function () {
 //seat arrangement ends
 
 //payment
-function proceedToPayment() {
+async function proceedToPayment() {
+  const eventNo = $("#eventSelection :selected").val();
+  const seat = await fetch(
+    `http://localhost:5000/api/client/bookAvailable/${eventNo}`,
+    {
+      method: "GET",
+    }
+  ).then((response) => response.json());
+
   var allNameVals = [];
   var allNumberVals = [];
   var allSeatsVals = [];
@@ -185,6 +208,17 @@ function proceedToPayment() {
   // console.log(allEmailVals);
   //console.log(allEventVals);
 
+  let myArr = [];
+  seat.seats.forEach((element) => {
+    myArr.push(element.seatNumber);
+  });
+
+  // console.log(allSeatsVals);
+  // console.log(myArr);
+
+  let difference = allSeatsVals.filter((x) => myArr.indexOf(x) === -1);
+  // console.log(difference);
+
   fetch("http://localhost:5000/api/client/bookings", {
     method: "POST",
     headers: {
@@ -193,7 +227,7 @@ function proceedToPayment() {
     body: JSON.stringify({
       guestName: allNameVals[0],
       numberOfSeats: parseInt(allNumberVals[0]),
-      seats: allSeatsVals,
+      seats: difference,
       guestEmail: allEmailVals[0],
       eventId: allEventVals[0],
       paymentStatus: false,

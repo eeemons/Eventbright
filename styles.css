@@ -358,6 +358,7 @@ input[type="checkbox"]:checked:before {
   flex-basis: 1;
   flex-wrap: wrap;
   align-items: center;
+  margin: 0 2%;
 }
 
 .table-left {
