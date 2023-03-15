@@ -43,6 +43,14 @@
   <div class="user-info-column">
     <b>Email *:</b> <input type="email" name="" id="Email" class="seat-arrange__input" required>
   </div>
+
+  <div>
+    <select name="" id="eventSelection">
+      <option selected value="1305ed5a-00b3-4b23-be9d-f5cead51e19a">Event-1</option>
+      <option value="7411e4a7-5ee6-49d7-8ac8-24fe35131d3c">Event-2</option>
+      <option value="b058c90b-3e97-493a-a154-88e3df6c0908">Event-3</option>
+    </select>
+  </div>
   </div>
   <br/><br/>
   <button class="seat-arrange__btn" onclick="takeData()">Start Selecting</button>
@@ -783,12 +791,14 @@
     <th>Number of Seats</th>
     <th>Seats</th>
     <th>Email</th>
+    <th>Event</th>
   </tr>
   <tr>
     <td><textarea id="nameDisplay"></textarea></td>
     <td><textarea id="NumberDisplay"></textarea></td>
     <td><textarea id="seatsDisplay"></textarea></td>
     <td><textarea id="emailDisplay"></textarea></td>
+    <td><textarea id="eventDisplay"></textarea></td>
   </tr>
 </table>
 </center>

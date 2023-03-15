@@ -33,11 +33,28 @@ minus.addEventListener("click", handleMinus);
 //counter code ends
 
 //seat arrangement starts
-function onLoaderFunc() {
+async function onLoaderFunc() {
   $(".seatStructure *").prop("disabled", true);
   $(".displayerBoxes *").prop("disabled", true);
+  const seat = await fetch(
+    "http://localhost:5000/api/client/bookAvailable/7411e4a7-5ee6-49d7-8ac8-24fe35131d3c",
+    {
+      method: "GET",
+    }
+  ).then((response) => response.json());
+
+  // seat.seats.map((data) =>
+  //   console.log("From onloader" + " " + data.seatNumber)
+  // );
+  // seat.seats.forEach((element) => {
+  //   $(
+  //     'input[type="checkbox"][class="seats"][value="' +
+  //       element.seatNumber +
+  //       '"]'
+  //   ).prop("checked", true);
+  // });
 }
-function takeData() {
+async function takeData() {
   if ($("#Username").val().length < 0 || $("#Numseats").val().length < 0) {
     alert("Please enter a positive seat number");
   }
@@ -49,9 +66,39 @@ function takeData() {
     document.getElementById("notification").innerHTML =
       "<b style='margin-bottom:0px;background:yellow;'>Please Select your Seats NOW!</b>";
   }
+  const eventNo = $("#eventSelection :selected").val();
+  const seat = await fetch(
+    `http://localhost:5000/api/client/bookAvailable/${eventNo}`,
+    {
+      method: "GET",
+    }
+  ).then((response) => response.json());
+  // seat.seats.map((data) =>
+  //   console.log("From take data" + data.seatStatus, data.seatNumber)
+  // );
+  seat.seats.forEach((element) => {
+    $(
+      'input[type="checkbox"][class="seats"][value="' +
+        element.seatNumber +
+        '"]'
+    ).prop("checked", true);
+    $(
+      'input[type="checkbox"][class="seats"][value="' +
+        element.seatNumber +
+        '"]'
+    ).attr("disabled", true);
+  });
 }
 
-function updateTextArea() {
+async function updateTextArea() {
+  const eventNo = $("#eventSelection :selected").val();
+  const seat = await fetch(
+    `http://localhost:5000/api/client/bookAvailable/${eventNo}`,
+    {
+      method: "GET",
+    }
+  ).then((response) => response.json());
+
   if ($("input:checked").length == $("#Numseats").val()) {
     $(".seatStructure *").prop("disabled", true);
 
@@ -59,11 +106,13 @@ function updateTextArea() {
     var allNumberVals = [];
     var allSeatsVals = [];
     var allEmailVals = [];
+    var allEventVals = [];
 
     //Storing in Array
     allNameVals.push($("#Username").val());
     allEmailVals.push($("#Email").val());
     allNumberVals.push($("#Numseats").val());
+    allEventVals.push($("#eventSelection :selected").text());
     $("#seatsBlock :checked").each(function () {
       allSeatsVals.push($(this).val());
     });
@@ -73,6 +122,7 @@ function updateTextArea() {
     $("#emailDisplay").val(allEmailVals);
     $("#NumberDisplay").val(allNumberVals);
     $("#seatsDisplay").val(allSeatsVals);
+    $("#eventDisplay").val(allEventVals);
 
     var button = document.querySelector("#seat-arrange__btn-disable");
     button.disabled = false;
@@ -119,10 +169,12 @@ function proceedToPayment() {
   var allNumberVals = [];
   var allSeatsVals = [];
   var allEmailVals = [];
+  var allEventVals = [];
 
   allNameVals.push($("#Username").val());
   allEmailVals.push($("#Email").val());
   allNumberVals.push($("#Numseats").val());
+  allEventVals.push($("#eventSelection :selected").val());
   $("#seatsBlock :checked").each(function () {
     allSeatsVals.push($(this).val());
   });
@@ -131,17 +183,20 @@ function proceedToPayment() {
   // console.log(allNumberVals);
   // console.log(allSeatsVals);
   // console.log(allEmailVals);
+  //console.log(allEventVals);
 
-  fetch("https://reqres.in/api/users", {
+  fetch("http://localhost:5000/api/client/bookings", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      NameVals: allNameVals,
-      NumberVals: allNumberVals,
-      SeatsVals: allSeatsVals,
-      EmailVals: allEmailVals,
+      guestName: allNameVals[0],
+      numberOfSeats: parseInt(allNumberVals[0]),
+      seats: allSeatsVals,
+      guestEmail: allEmailVals[0],
+      eventId: allEventVals[0],
+      paymentStatus: false,
     }),
   })
     .then((res) => {
