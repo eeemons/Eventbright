@@ -142,6 +142,20 @@ async function updateTextArea() {
     var button = document.querySelector("#seat-arrange__btn-disable");
     button.disabled = false;
     button.classList.remove("seat-arrange__btn-disable");
+
+    await fetch("http://localhost:5000/api/client/calculateSeatPrice", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        seats: difference,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => $("#priceDisplay").val(data.amountPayable));
   } else {
     alert("Please select " + $("#Numseats").val() + " seats");
   }
