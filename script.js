@@ -253,3 +253,78 @@ async function proceedToPayment() {
     .then((data) => console.log(data))
     .catch((error) => console.log("ERROR"));
 }
+
+//Admin panel code
+
+async function adminOnloader() {
+  const booking = [];
+  const res = await fetch("http://localhost:5000/api/client/bookings", {
+    method: "GET",
+  }).then((response) => response.json());
+  res.bookings.forEach((data) => {
+    // console.log(data);
+    // $("#idDisplay").val(data[0].id);
+    // $("#nameDisplay").val(data[0].guestName);
+    // $("#seatDisplay").val(allNumberVals);
+    // $("#emailDisplay").val(data[0].guestEmail);
+    // $("#priceDisplay").val(data[0].amountPayable);
+    booking.push(data);
+  });
+
+  booking.forEach((element) => {
+    var table = document.getElementById("customers");
+
+    var trNode = document.createElement("tr");
+    // var trValue = "";
+
+    var tdId = document.createElement("td");
+    var tdName = document.createElement("td");
+    var tdSeat = document.createElement("td");
+    var tdEmail = document.createElement("td");
+    var tdAmount = document.createElement("td");
+    var btn1 = document.createElement("button");
+    var btn2 = document.createElement("button");
+
+    var tdIdValue = element.id;
+    var tdNameValue = element.guestName;
+    var tdSeatValue = element.seats;
+    var tdEmailValue = element.guestEmail;
+    var tdAmountValue = element.amountPayable;
+
+    // trNode.innerHTML = trValue;
+    tdId.innerHTML = tdIdValue;
+    tdName.innerHTML = tdNameValue;
+    tdSeat.innerHTML = tdSeatValue;
+    tdEmail.innerHTML = tdEmailValue;
+    tdAmount.innerHTML = tdAmountValue;
+
+    trNode.appendChild(tdId);
+    trNode.appendChild(tdName);
+    trNode.appendChild(tdSeat);
+    trNode.appendChild(tdEmail);
+    trNode.appendChild(tdAmount);
+    trNode.appendChild(btn2);
+    trNode.appendChild(btn1);
+
+    btn1.classList.add("button");
+    btn1.classList.add("button1");
+    btn1.innerHTML = "&#10003;";
+    btn1.addEventListener("click", approveSeatBooking);
+
+    btn2.classList.add("button");
+    btn2.classList.add("button3");
+    btn2.innerHTML = "&#215;";
+    btn2.addEventListener("click", denySeatBooking);
+
+    table.appendChild(trNode);
+    // document.getElementById("idDisplay").innerHTML = element.id;
+    // console.log(element.id);
+  });
+}
+
+function approveSeatBooking() {
+  console.log("approved");
+}
+function denySeatBooking() {
+  console.log("not approved");
+}
