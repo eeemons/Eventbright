@@ -111,11 +111,13 @@ async function updateTextArea() {
     var allSeatsVals = [];
     var allEmailVals = [];
     var allEventVals = [];
+    var allPhoneVals = [];
 
     //Storing in Array
     allNameVals.push($("#Username").val());
     allEmailVals.push($("#Email").val());
     allNumberVals.push($("#Numseats").val());
+    allPhoneVals.push($("#Phone").val());
     allEventVals.push($("#eventSelection :selected").text());
     $("#seatsBlock :checked").each(function () {
       allSeatsVals.push($(this).val());
@@ -138,6 +140,7 @@ async function updateTextArea() {
     $("#NumberDisplay").val(allNumberVals);
     $("#seatsDisplay").val(difference);
     $("#eventDisplay").val(allEventVals);
+    $("#phoneDisplay").val(allPhoneVals);
 
     var button = document.querySelector("#seat-arrange__btn-disable");
     button.disabled = false;
@@ -207,10 +210,12 @@ async function proceedToPayment() {
   var allSeatsVals = [];
   var allEmailVals = [];
   var allEventVals = [];
+  var allPhoneVals = [];
 
   allNameVals.push($("#Username").val());
   allEmailVals.push($("#Email").val());
   allNumberVals.push($("#Numseats").val());
+  allPhoneVals.push($("#Phone").val());
   allEventVals.push($("#eventSelection :selected").val());
   $("#seatsBlock :checked").each(function () {
     allSeatsVals.push($(this).val());
@@ -245,6 +250,7 @@ async function proceedToPayment() {
       guestEmail: allEmailVals[0],
       eventId: allEventVals[0],
       paymentStatus: false,
+      phone: allPhoneVals[0],
     }),
   })
     .then((res) => {
@@ -261,6 +267,7 @@ async function adminOnloader() {
   const res = await fetch("http://localhost:5000/api/client/bookings", {
     method: "GET",
   }).then((response) => response.json());
+  // console.log(res.bookings[0].event.eventName);
   res.bookings.forEach((data) => {
     // console.log(data);
     // $("#idDisplay").val(data[0].id);
@@ -280,7 +287,9 @@ async function adminOnloader() {
     var tdId = document.createElement("td");
     var tdName = document.createElement("td");
     var tdSeat = document.createElement("td");
+    var tdEvent = document.createElement("td");
     var tdEmail = document.createElement("td");
+    var tdPhone = document.createElement("td");
     var tdAmount = document.createElement("td");
     var btn1 = document.createElement("button");
     var btn2 = document.createElement("button");
@@ -288,20 +297,26 @@ async function adminOnloader() {
     var tdIdValue = element.id;
     var tdNameValue = element.guestName;
     var tdSeatValue = element.seats;
+    var tdEventValue = element.event.eventName;
     var tdEmailValue = element.guestEmail;
+    var tdPhoneValue = element.phone;
     var tdAmountValue = element.amountPayable;
 
     // trNode.innerHTML = trValue;
     tdId.innerHTML = tdIdValue;
     tdName.innerHTML = tdNameValue;
     tdSeat.innerHTML = tdSeatValue;
+    tdEvent.innerHTML = tdEventValue;
     tdEmail.innerHTML = tdEmailValue;
+    tdPhone.innerHTML = tdPhoneValue;
     tdAmount.innerHTML = tdAmountValue;
 
     trNode.appendChild(tdId);
     trNode.appendChild(tdName);
     trNode.appendChild(tdSeat);
+    trNode.appendChild(tdEvent);
     trNode.appendChild(tdEmail);
+    trNode.appendChild(tdPhone);
     trNode.appendChild(tdAmount);
     trNode.appendChild(btn2);
     trNode.appendChild(btn1);
@@ -322,9 +337,46 @@ async function adminOnloader() {
   });
 }
 
-function approveSeatBooking() {
+async function approveSeatBooking() {
+  var currentRow = $(this).closest("tr");
+  var col1 = currentRow.find("td:eq(0)").text();
+
+  var data = col1;
+
+  fetch(`http://localhost:5000/api/client/approve/${data}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      title: "foo",
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+
+  console.log(data);
+
   console.log("approved");
 }
 function denySeatBooking() {
+  var currentRow = $(this).closest("tr");
+  var col1 = currentRow.find("td:eq(0)").text();
+
+  var data = col1;
+
+  fetch(`http://localhost:5000/api/client/bookings/${data}`, {
+    method: "DELETE",
+    body: JSON.stringify({
+      title: "foo",
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+
+  console.log(data);
   console.log("not approved");
 }
