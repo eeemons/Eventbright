@@ -620,6 +620,9 @@ input[type="checkbox"]:checked:before {
   .column-one {
     min-width: 100%;
   }
+  body {
+    overflow-x: hidden;
+  }
   .column-two {
     position: fixed;
     float: none;
@@ -630,8 +633,12 @@ input[type="checkbox"]:checked:before {
   }
   .poster-placement {
     min-width: 100%;
-    margin: 0;
+    margin-left: 4%;
     max-width: 300px;
+  }
+
+  .banner-container {
+    margin-left: 4%;
   }
 
   .about-org-container {
