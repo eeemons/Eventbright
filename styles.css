@@ -623,7 +623,7 @@ input[type="checkbox"]:checked:before {
   .column-two {
     position: fixed;
     float: none;
-    top: 90%;
+    top: 85%;
     left: 0;
     min-width: 100%;
     height: fit-content;
