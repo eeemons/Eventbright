@@ -634,10 +634,16 @@ input[type="checkbox"]:checked:before {
   .poster-placement {
     min-width: 100%;
     max-width: 300px;
+    margin: 0;
   }
 
   .about-org-container {
     margin-bottom: 200px;
+  }
+  .column-one {
+    display: inline-block;
+    width: 100%;
+    margin-left: 0;
   }
 }
 
