@@ -187,6 +187,15 @@ h4 {
   overflow: hidden;
 }
 
+.poster-placement {
+  width: 50%;
+  margin-left: 8%;
+}
+
+.poster-placement > img {
+  width: 100%;
+}
+
 .about-org-container {
   margin: 8%;
 }
@@ -614,10 +623,19 @@ input[type="checkbox"]:checked:before {
   .column-two {
     position: fixed;
     float: none;
-    top: 70%;
+    top: 78%;
     left: 0;
     min-width: 100%;
     height: fit-content;
+  }
+  .poster-placement {
+    min-width: 100%;
+    margin: 0;
+    max-width: 300px;
+  }
+
+  .about-org-container {
+    margin-bottom: 200px;
   }
 }
 
