@@ -625,7 +625,7 @@ input[type="checkbox"]:checked:before {
     float: none;
     top: 90dvh;
     left: 0;
-    min-width: 100%;
+    min-width: 100dvw;
     height: fit-content;
   }
   .poster-placement {
